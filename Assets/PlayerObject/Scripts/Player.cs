@@ -1,16 +1,38 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Player Prerequisites")] [SerializeField]
+    private PlayerMove _move;
+
+
+    [Header("State")] public PlayerState PState { get; private set; }
+
+
+    private void Awake()
     {
-        
+        if (_move == null)
+        {
+            Debug.Log("Move Controller not Found!");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        SetPlayerState(PlayerState.IDLE);   
     }
+
+
+    public void SetPlayerState(PlayerState state)
+    {
+        PState = state;
+    }
+
+}
+
+public enum PlayerState
+{
+    IDLE,
+    MOVING
 }
