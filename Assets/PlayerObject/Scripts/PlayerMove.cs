@@ -1,16 +1,22 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private NavMeshAgent _agent;
+    public Transform Destination;
+
+    private void Awake()
     {
-        
+        _agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Tick()
     {
-        
+        _agent.SetDestination(Destination.position);
     }
+    
+    
 }

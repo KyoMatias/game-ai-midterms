@@ -3,8 +3,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [Header("Player Prerequisites")] [SerializeField]
-    private PlayerMove _move;
+    [Header("Player Prerequisites")]
+    [SerializeField] private PlayerMove _move;
+    
+    [Header("Camera")]
+    [SerializeField] private Camera _camera;
+
+    [Header("Player Variables")] 
+    [SerializeField] private string _playerName;
+
+    [SerializeField] private string _playerHP;
 
 
     [Header("State")] public PlayerState PState { get; private set; }
@@ -21,18 +29,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetPlayerState(PlayerState.IDLE);   
-    }
 
+    }
 
     public void SetPlayerState(PlayerState state)
     {
         PState = state;
     }
 
-}
-
-public enum PlayerState
-{
-    IDLE,
-    MOVING
+    private void Update()
+    {
+        _move.Tick();
+    }
 }
