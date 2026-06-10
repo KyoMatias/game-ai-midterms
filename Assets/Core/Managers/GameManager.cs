@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,13 +22,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [Header("GameState")] public GameState G_State;
-
-    [Header("Player")] [SerializeField] private Player _player;
-
-    [SerializeField] private string _playerName;
-
-    [SerializeField] private float _playerHP;
-
     void Awake()
     {
         _instance = this;
@@ -50,14 +44,9 @@ public class GameManager : MonoBehaviour
 
     public void Init()
     {
-        SetupPlayer();
-        EventManager.RaiseUpdateGameState(GameState.BOOT);   
+        HandleGameState(GameState.BOOT);
     }
 
-    void SetupPlayer()
-    {
-        _playerName = _player.P_Data.Player_Name;
-    }
 
     private void HandleGameState(GameState g_state)
     {
@@ -67,12 +56,15 @@ public class GameManager : MonoBehaviour
                 InitProperties();
                 //Load Stuff
                 break;
-            case GameState.MENU:
-                //Open Menu via SceneManager
-                break;
             case GameState.PRELOAD:
                 EventManager.RaiseUpdatePlayerState(PlayerState.IDLE);
                 // Load Active Objects
+                break;
+            case GameState.MENU:
+                //Open Menu via SceneManager
+                break;
+            case GameState.PREGAME:
+                //Pregame Settings
                 break;
             case GameState.LIVE:
                 EventManager.RaiseUpdatePlayerState(PlayerState.MOVING);
@@ -94,14 +86,15 @@ public class GameManager : MonoBehaviour
 
     private void  InitProperties()
     {
-        
+        Debug.Log("GAMEMANAGER: Loading Properties");
     }
 
     public enum GameState
     {
         BOOT,
-        MENU,
         PRELOAD,
+        MENU,
+        PREGAME,
         LIVE,
         WIN,
         LOSE,

@@ -1,38 +1,61 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class Boot : MonoBehaviour
 {
 
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private SceneMasterManager _sceneManager;
+    [SerializeField] private EventManager _eventManager;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //*--PRIVATE VARIABLES--*//
+    public float TimeRemaining = 5f;
+    public bool IsTimeRunning = false;
     private void Awake()
     {
-        Init();
+        StartDebugTimer();
     }
 
-    void Start()
+    void StartDebugTimer()
     {
+        IsTimeRunning = true;
+    }
+
+    void Update()
+    {
+        if (IsTimeRunning)
+        {
+            if (TimeRemaining > 0)
+            {
+                TimeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                TimeRemaining = 0;
+                IsTimeRunning = false;
+                Init();
+            }
+            return;
+        }
     }
 
     private void Init()
     {
-        if (_gameManager == null) _gameManager = gameObject.GetComponentInChildren<GameManager>(true);
+        Debug.Log("BOOTING GAME!");
+        SceneManager.LoadScene("PERSISTENT", LoadSceneMode.Additive);
         if(!_gameManager) Debug.Log("GameManager Not Found");
-
-        if (_sceneManager == null) _sceneManager = gameObject.GetComponentInChildren<SceneMasterManager>(true);
+        if(!_sceneManager) Debug.Log("SceneManager Not Found");
+        if(!_eventManager) Debug.Log("EventManager Not Found");
         
-        StartBoot();
     }
 
     private void StartBoot()
     {
-        _sceneManager.Init();
-        _gameManager.Init();
+        if(_gameManager) _gameManager.Init();
         Debug.Log("GameManager Initialized!");
+        if(_eventManager) Debug.Log("EventManager Initialized");
     }
 }
 
