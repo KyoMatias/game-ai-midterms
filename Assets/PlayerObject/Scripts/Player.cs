@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public string PlayerName;
     public float PlayerHP;
 
+    [Header("Player Triggers")] [SerializeField]
+    private bool _canMove;
+    
     [Header("State")]
     public PlayerState PState { get; private set; }
 
@@ -29,6 +32,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnEnable() => EventManager.ON_PLAYER_STATE += SetPlayerState;
+
+    private void OnDisable() => EventManager.ON_PLAYER_STATE -= SetPlayerState;
+
     void Start()
     {
         //Fetch Prerequisites First
@@ -40,9 +47,27 @@ public class Player : MonoBehaviour
         _ui.SetPlayerName(PlayerName);
     }
 
-    public PlayerState SetPlayerState(PlayerState state)
+    public void SetPlayerState(PlayerState p_state)
     {
-        return PState = state;
+        if (P_Data.Player_State== p_state) return;
+        P_Data.Player_State = p_state;
+        HandlePlayerState(p_state);
+    }
+
+    private void HandlePlayerState(PlayerState state)
+    {
+        switch (state)
+        {
+            case PlayerState.IDLE:
+                _move.StopMoving();
+                break;
+            case PlayerState.MOVING:
+                _move.StartMoving();
+                break;
+            case PlayerState.DEAD:
+                //PlayerDead
+                break;
+        }
     }
 
     private void InitializePlayer(PlayerData data)
