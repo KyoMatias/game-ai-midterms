@@ -43,6 +43,8 @@ public class EventManager : MonoBehaviour
     public static event Action<GameManager.GameState> ON_GAMESTATE_UPDATE;
     public static event Action<float> ON_TIMER_UPDATE;
 
+    //MENUS
+
     //Player
     public static event Action<PlayerState> ON_PLAYER_STATE;
 

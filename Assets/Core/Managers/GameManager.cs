@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [Header("GameState")] public GameState G_State;
+    [Header("GameState")]
+    public GameState G_State;
+
     void Awake()
     {
         _instance = this;
@@ -37,16 +39,12 @@ public class GameManager : MonoBehaviour
         EventManager.ON_GAMESTATE_UPDATE -= HandleGameState;
     }
 
-    void Start()
-    {
-
-    }
+    void Start() { }
 
     public void Init()
     {
         HandleGameState(GameState.BOOT);
     }
-
 
     private void HandleGameState(GameState g_state)
     {
@@ -61,6 +59,7 @@ public class GameManager : MonoBehaviour
                 // Load Active Objects
                 break;
             case GameState.MENU:
+                UIMenuManager.Instance.SetState(MenuState.MAIN_MENU);
                 //Open Menu via SceneManager
                 break;
             case GameState.PREGAME:
@@ -78,13 +77,12 @@ public class GameManager : MonoBehaviour
                 //Stops everything on the scene
                 break;
             case GameState.POST:
-                // Unloads and Clears 
+                // Unloads and Clears
                 break;
         }
     }
 
-
-    private void  InitProperties()
+    private void InitProperties()
     {
         Debug.Log("GAMEMANAGER: Loading Properties");
     }
@@ -99,7 +97,6 @@ public class GameManager : MonoBehaviour
         WIN,
         LOSE,
         POST,
-        END
+        END,
     }
 }
-
