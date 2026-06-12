@@ -7,7 +7,6 @@ public class Boot : MonoBehaviour
 {
 
     [SerializeField] private GameManager _gameManager;
-    [SerializeField] private SceneMasterManager _sceneManager;
     [SerializeField] private EventManager _eventManager;
     
     //*--PRIVATE VARIABLES--*//
@@ -46,7 +45,6 @@ public class Boot : MonoBehaviour
         Debug.Log("BOOTING GAME!");
         SceneManager.LoadScene("PERSISTENT", LoadSceneMode.Additive);
         if(!_gameManager) Debug.Log("GameManager Not Found");
-        if(!_sceneManager) Debug.Log("SceneManager Not Found");
         if(!_eventManager) Debug.Log("EventManager Not Found");
         
     }

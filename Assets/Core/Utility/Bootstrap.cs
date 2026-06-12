@@ -6,10 +6,7 @@ public class Bootstrap : MonoBehaviour
 {
     [Header("Scene Parameters")]
     [SerializeField]
-    private string _persistentScene = "PERSISTENT";
-
-    [SerializeField]
-    private string _mapScene = "MAP";
+    private string[] _scenes;
 
     [Header("Debug")]
     [SerializeField]
@@ -33,6 +30,7 @@ public class Bootstrap : MonoBehaviour
     {
         if (_isRunning)
         {
+            EventManager.RaiseUpdateTimer(_timeRemaining);
             if (_timeRemaining > 0)
             {
                 _timeRemaining -= Time.deltaTime;
@@ -49,12 +47,12 @@ public class Bootstrap : MonoBehaviour
 
     private IEnumerator LoadScenes()
     {
-        var loadPersistent = SceneManager.LoadSceneAsync(_persistentScene, LoadSceneMode.Additive);
-        yield return loadPersistent;
-
-        var loadMap = SceneManager.LoadSceneAsync(_mapScene, LoadSceneMode.Additive);
-        yield return loadMap;
-
+        foreach (var p_scene in _scenes)
+        {
+            var load = SceneManager.LoadSceneAsync(p_scene, LoadSceneMode.Additive);
+            yield return load;
+        }
+        Debug.Log("Loading Scenes");
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

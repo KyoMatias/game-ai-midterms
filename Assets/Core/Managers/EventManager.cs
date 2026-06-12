@@ -38,9 +38,10 @@ public class EventManager : MonoBehaviour
     // ex: public static event Action {EventName};
     //*-------------------------------------------*//
 
+    //GAME STATES
     public static event Action ON_START_GAME;
     public static event Action<GameManager.GameState> ON_GAMESTATE_UPDATE;
-    public static event Action<string> ON_SCENE_LOAD;
+    public static event Action<float> ON_TIMER_UPDATE;
 
     //Player
     public static event Action<PlayerState> ON_PLAYER_STATE;
@@ -56,5 +57,5 @@ public class EventManager : MonoBehaviour
     public static void RaiseUpdatePlayerState(PlayerState p_state) =>
         ON_PLAYER_STATE?.Invoke(p_state);
 
-    public static void RaiseLoadScene(string p_scene) => ON_SCENE_LOAD?.Invoke(p_scene);
+    public static void RaiseUpdateTimer(float p_value) => ON_TIMER_UPDATE?.Invoke(p_value);
 }
