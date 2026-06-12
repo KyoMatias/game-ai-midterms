@@ -577,7 +577,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792190666}
-  - component: {fileID: 792190665}
   m_Layer: 0
   m_Name: =SYSTEMS=
   m_TagString: Untagged
@@ -585,20 +584,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &792190665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792190664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1105759063969fa45b271016dc2c490a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Boot
-  _gameManager: {fileID: 0}
-  _sceneManager: {fileID: 0}
 --- !u!4 &792190666
 Transform:
   m_ObjectHideFlags: 0
@@ -660,10 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d11c74b051624c9484a4404fba54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  G_State: 0
-  _player: {fileID: 1369062571}
-  _playerName: 
-  _playerHP: 0
+  G_State: 1
 --- !u!1 &1369062568
 GameObject:
   m_ObjectHideFlags: 0
