@@ -24,7 +24,9 @@ public class UIMenuManager : MonoBehaviour
 {
     public static UIMenuManager Instance { get; private set; }
 
-    public MenuState M_State { get; private set; }
+    [SerializeField]
+    private MenuState _state;
+    public MenuState M_State => _state;
 
     [Header("Menus")]
     [SerializeField]
@@ -39,6 +41,8 @@ public class UIMenuManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        _state = MenuState.NONE;
         _mainCanvas = UI_MainCanvas.GetComponent<Canvas>();
         SetupCamera();
     }
@@ -49,7 +53,7 @@ public class UIMenuManager : MonoBehaviour
 
     void Start()
     {
-        M_State = MenuState.NONE;
+        SetState(_state);
     }
 
     private void SetupCamera()
@@ -69,7 +73,7 @@ public class UIMenuManager : MonoBehaviour
         switch (m_state)
         {
             case MenuState.NONE:
-                MainMenuToggle(false);
+                DisableMenus();
                 Debug.Log("ALL MENUS DISABLED");
                 break;
             case MenuState.MAIN_MENU:
@@ -86,6 +90,11 @@ public class UIMenuManager : MonoBehaviour
     private void LogStateChange(MenuState m_state)
     {
         Debug.Log($"Switched to: {m_state}");
+    }
+
+    void DisableMenus()
+    {
+        MainMenuToggle(false);
     }
 }
 

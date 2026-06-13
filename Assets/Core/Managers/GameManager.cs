@@ -22,11 +22,14 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [Header("GameState")]
-    public GameState G_State;
+    [SerializeField]
+    private GameState g_state;
+    public GameState G_State => g_state;
 
     void Awake()
     {
         _instance = this;
+        Init();
     }
 
     private void OnEnable()
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.PRELOAD:
                 EventManager.RaiseUpdatePlayerState(PlayerState.IDLE);
+                UIMenuManager.Instance.SetState(MenuState.NONE);
                 // Load Active Objects
                 break;
             case GameState.MENU:
