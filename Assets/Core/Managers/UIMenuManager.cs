@@ -29,6 +29,7 @@ public class UIMenuManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField]
     private GameObject UI_MainCanvas;
+    private Canvas _mainCanvas;
 
     protected virtual void Awake()
     {
@@ -38,7 +39,7 @@ public class UIMenuManager : MonoBehaviour
             return;
         }
         Instance = this;
-
+        _mainCanvas = UI_MainCanvas.GetComponent<Canvas>();
         SetupCamera();
     }
 
@@ -51,12 +52,15 @@ public class UIMenuManager : MonoBehaviour
         M_State = MenuState.NONE;
     }
 
-    void SetupCamera()
+    private void SetupCamera()
     {
-        Canvas canvas = GetComponent<Canvas>();
-        //NOTE:Assigns the main camera once the scene loads.
-        if (canvas.renderMode == RenderMode.ScreenSpaceCamera && canvas.worldCamera == null)
-            canvas.worldCamera = Camera.main;
+        if (
+            _mainCanvas.renderMode == RenderMode.ScreenSpaceCamera
+            && _mainCanvas.worldCamera == null
+        )
+        {
+            _mainCanvas.worldCamera = Camera.main;
+        }
     }
 
     public void SetState(MenuState m_state)

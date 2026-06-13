@@ -125,7 +125,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1930330313}
     m_Modifications:
     - target: {fileID: 93164120762993897, guid: cefa7a62eacc75b49874191a7b8ee10c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -600,9 +600,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320242116}
   m_CullTransparentMesh: 1
---- !u!1 &1385927236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1121481467162557140, guid: cefa7a62eacc75b49874191a7b8ee10c, type: 3}
+--- !u!224 &1385927237 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6281713911937887023, guid: cefa7a62eacc75b49874191a7b8ee10c, type: 3}
   m_PrefabInstance: {fileID: 15567652}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568130182
@@ -751,6 +751,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4fe25c1bc3d9b44a66f5a9a35388f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventManager
+--- !u!1 &1930330312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930330313}
+  m_Layer: 0
+  m_Name: LoadingCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930330313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930330312}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1385927237}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1979061653
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,14 +846,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ad7b15f4e35e94cabd85f731c74d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingManager
-  _loadingCanvasUI: {fileID: 1385927236}
+  _loadingCanvasUI: {fileID: 1930330312}
   _slider: {fileID: 519268085}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 50247998}
-  - {fileID: 15567652}
+  - {fileID: 1930330313}
   - {fileID: 1568130186}
   - {fileID: 1979061655}
   - {fileID: 1900768628}
