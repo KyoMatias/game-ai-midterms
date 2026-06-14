@@ -516,7 +516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d11c74b051624c9484a4404fba54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  G_State: 0
 --- !u!114 &519268085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3283325840953757528, guid: cefa7a62eacc75b49874191a7b8ee10c, type: 3}
@@ -832,7 +831,7 @@ MonoBehaviour:
   - UI
   - PERSISTENT
   - MAP
-  _timeRemaining: 10
+  _timeRemaining: 5
   _isRunning: 0
 --- !u!114 &1979061657
 MonoBehaviour:

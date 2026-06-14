@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 /* =============================================================================
     Project:        UIMenuManager
@@ -28,6 +29,9 @@ public class UIMenuManager : MonoBehaviour
     private MenuState _state;
     public MenuState M_State => _state;
 
+    [SerializeField]
+    private Button _playBtn;
+
     [Header("Menus")]
     [SerializeField]
     private GameObject UI_MainCanvas;
@@ -47,9 +51,15 @@ public class UIMenuManager : MonoBehaviour
         SetupCamera();
     }
 
-    void OnEnable() { }
+    void OnEnable()
+    {
+        _playBtn.onClick.AddListener(OnPlayPressed);
+    }
 
-    void OnDisable() { }
+    void OnDisable()
+    {
+        _playBtn.onClick.RemoveListener(OnPlayPressed);
+    }
 
     void Start()
     {
@@ -95,6 +105,13 @@ public class UIMenuManager : MonoBehaviour
     void DisableMenus()
     {
         MainMenuToggle(false);
+    }
+
+    //DEBUG
+    void OnPlayPressed()
+    {
+        EventManager.RaiseUpdateGameState(GameState.LIVE);
+        SetState(MenuState.NONE);
     }
 }
 

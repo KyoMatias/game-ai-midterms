@@ -18,6 +18,12 @@ public class Bootstrap : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        StartCoroutine(InitBootStrap());
+    }
+
+    private IEnumerator InitBootStrap()
+    {
+        yield return UnloadAllExceptBoot();
         StartTimer();
     }
 
@@ -55,5 +61,21 @@ public class Bootstrap : MonoBehaviour
         Debug.Log("Loading Scenes");
         EventManager.RaiseUpdateGameState(GameState.MENU);
         SceneManager.UnloadSceneAsync(gameObject.scene);
+    }
+
+    private IEnumerator UnloadAllExceptBoot()
+    {
+        const string bootSceneName = "BOOT";
+
+        for (int i = SceneManager.sceneCount - 1; i >= 0; i--)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+
+            if (scene.name == bootSceneName)
+                continue;
+
+            if (scene.isLoaded)
+                yield return SceneManager.UnloadSceneAsync(scene);
+        }
     }
 }

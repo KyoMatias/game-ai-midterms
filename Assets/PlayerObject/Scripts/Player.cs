@@ -83,8 +83,8 @@ public class Player : MonoBehaviour
         _ui = GetComponent<PlayerUI>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        _move.Tick();
+        _move.FixedTick();
     }
 }
