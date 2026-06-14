@@ -49,6 +49,9 @@ public class EventManager : MonoBehaviour
     public static event Action<PlayerState> ON_PLAYER_STATE;
     public static event Action<bool> ON_PLAYERINPUT_TOGGLE;
 
+    //UI
+    public static event Action<float, bool> ON_DETECTION;
+
     //Create Raisers Here
     // ex: public static void Event() => {EventName}?.Invoke();
 
@@ -63,4 +66,7 @@ public class EventManager : MonoBehaviour
 
     public static void RaiseTogglePlayerInput(bool p_value) =>
         ON_PLAYERINPUT_TOGGLE?.Invoke(p_value);
+
+    public static void RaiseOnDetection(float p_value, bool b_value) =>
+        ON_DETECTION?.Invoke(p_value, b_value);
 }
