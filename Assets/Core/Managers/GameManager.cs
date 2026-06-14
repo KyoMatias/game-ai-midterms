@@ -22,9 +22,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [Header("GameState")]
-    [SerializeField]
-    private GameState g_state;
-    public GameState G_State => g_state;
+    public GameState G_state { get; protected set; }
 
     void Awake()
     {
@@ -64,13 +62,14 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.MENU:
                 UIMenuManager.Instance.SetState(MenuState.MAIN_MENU);
+                EventManager.RaiseTogglePlayerInput(false);
                 //Open Menu via SceneManager
                 break;
             case GameState.PREGAME:
                 //Pregame Settings
                 break;
             case GameState.LIVE:
-                EventManager.RaiseUpdatePlayerState(PlayerState.MOVING);
+                EventManager.RaiseTogglePlayerInput(true);
                 //Game is Live
                 break;
             case GameState.WIN:
@@ -90,17 +89,17 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GAMEMANAGER: Loading Properties");
     }
+}
 
-    public enum GameState
-    {
-        BOOT,
-        PRELOAD,
-        MENU,
-        PREGAME,
-        LIVE,
-        WIN,
-        LOSE,
-        POST,
-        END,
-    }
+public enum GameState
+{
+    BOOT,
+    PRELOAD,
+    MENU,
+    PREGAME,
+    LIVE,
+    WIN,
+    LOSE,
+    POST,
+    END,
 }

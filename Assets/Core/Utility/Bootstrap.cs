@@ -53,7 +53,7 @@ public class Bootstrap : MonoBehaviour
             yield return load;
         }
         Debug.Log("Loading Scenes");
-        EventManager.RaiseUpdateGameState(GameManager.GameState.MENU);
+        EventManager.RaiseUpdateGameState(GameState.MENU);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }

@@ -1,36 +1,46 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent _agent;
-    public Transform Destination;
-
-    private bool _canMove;
+    [SerializeField]
+    private PlayerInput _playerInput;
+    private bool _canMove = false;
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        _playerInput = GetComponent<PlayerInput>();
     }
 
-
-    public void Tick()
+    void OnEnable()
     {
-        if (!_canMove) return;
-        if(_canMove) _agent.SetDestination(Destination.position);
+        EventManager.ON_PLAYERINPUT_TOGGLE += ToggleInput;
     }
 
-    public void StartMoving()
+    void OnDisable()
     {
-        _canMove = true;
-        _agent.isStopped = false;
+        EventManager.ON_PLAYERINPUT_TOGGLE -= ToggleInput;
     }
-    public void StopMoving()
+
+    void Start() { }
+
+    public void Tick() { }
+
+    void ToggleInput(bool p_value)
     {
-        _canMove = false;
-        _agent.isStopped = true;
-        _agent.ResetPath();
+        if (!_playerInput)
+            return;
+        if (_playerInput && _canMove)
+        {
+            _playerInput.ActivateInput();
+            Debug.Log($"Player Input is toggled to: {_canMove}");
+        }
+        else if (_playerInput && !_canMove)
+        {
+            _playerInput.DeactivateInput();
+            Debug.Log($"Player Input is toggled to: {_canMove}");
+        }
     }
-    
 }

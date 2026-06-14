@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
     public string PlayerName;
     public float PlayerHP;
 
-    [Header("Player Triggers")] [SerializeField]
+    [Header("Player Triggers")]
+    [SerializeField]
     private bool _canMove;
-    
+
     [Header("State")]
     public PlayerState PState { get; private set; }
 
@@ -49,7 +50,8 @@ public class Player : MonoBehaviour
 
     public void SetPlayerState(PlayerState p_state)
     {
-        if (P_Data.Player_State== p_state) return;
+        if (P_Data.Player_State == p_state)
+            return;
         P_Data.Player_State = p_state;
         HandlePlayerState(p_state);
     }
@@ -59,13 +61,13 @@ public class Player : MonoBehaviour
         switch (state)
         {
             case PlayerState.IDLE:
-                _move.StopMoving();
+                EventManager.RaiseTogglePlayerInput(false);
                 break;
             case PlayerState.MOVING:
-                _move.StartMoving();
+                EventManager.RaiseTogglePlayerInput(true);
                 break;
             case PlayerState.DEAD:
-                //PlayerDead
+                EventManager.RaiseTogglePlayerInput(false);
                 break;
         }
     }
